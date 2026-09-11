@@ -1,11 +1,11 @@
-import snapshot from "@/data/fmhy-snapshot.json";
-import { fetchFmhy, type FmhySync } from "@/lib/fmhy";
+import snapshot from "@/data/community-snapshot.json";
+import { fetchCommunity, type CommunitySync } from "@/lib/community-sync";
 
-// Cron worker: GET /api/cron/fmhy
-// Vercel cron hits this on schedule; it re-fetches the FMHY AI wiki,
+// Cron worker: GET /api/cron/community-sync
+// Vercel cron hits this on schedule; it re-fetches the community wiki,
 // diffs live entries against the checked-in snapshot, and returns the
 // drift. Promotion to full provider pages stays a conscious edit —
-// see /sources/fmhy and the dev console.
+// see /sources/community-index and the dev console.
 export const revalidate = 0;
 
 function key(e: { url: string }) {
@@ -20,7 +20,7 @@ export async function GET(req: Request) {
       return Response.json({ ok: false, error: "unauthorized" }, { status: 401 });
     }
   }
-  const live: FmhySync = await fetchFmhy();
+  const live: CommunitySync = await fetchCommunity();
   const snapUrls = new Set(
     Object.values(snapshot.sections as Record<string, { url: string }[]>)
       .flat()
@@ -47,7 +47,7 @@ export async function GET(req: Request) {
     added,
     removed,
     note: added.length
-      ? "New FMHY entries — review, then add to providers.ts / models.ts and update the snapshot."
+      ? "New community entries — review, then add to providers.ts / models.ts and update the snapshot."
       : "No drift vs snapshot.",
   });
 }

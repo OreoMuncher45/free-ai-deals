@@ -1,19 +1,19 @@
-import snapshot from "@/data/fmhy-snapshot.json";
-import { fetchFmhy } from "@/lib/fmhy";
+import snapshot from "@/data/community-snapshot.json";
+import { fetchCommunity } from "@/lib/community-sync";
 import { SITE_URL } from "@/data/providers";
 import type { Metadata } from "next";
 
-export const revalidate = 21600; // refresh from FMHY every 6h
+export const revalidate = 21600; // refresh from community wikis every 6h
 
 export const metadata: Metadata = {
-  title: "FMHY free AI mirror — multi-model chats, official studios",
+  title: "Community free AI index — multi-model chats, official studios",
   description:
-    "Auto-synced mirror of FMHY's free AI list: multi-model chat sites, official model studios, agents. Refreshed every 6 hours. Verify ToS before use.",
-  alternates: { canonical: `${SITE_URL}/sources/fmhy` },
+    "Community-sourced free AI list, refreshed every 6 hours: multi-model chat sites, official model studios, agents. Verify ToS before use.",
+  alternates: { canonical: `${SITE_URL}/sources/community-index` },
 };
 
-export default async function FmhyPage() {
-  const live = await fetchFmhy().catch(() => null);
+export default async function CommunityIndexPage() {
+  const live = await fetchCommunity().catch(() => null);
   const data = live && live.parseOk ? live : { ...snapshot, fetchedAt: (snapshot as { fetchedAt: string }).fetchedAt };
   const sections = Object.entries(data.sections as Record<string, { name: string; url: string; note: string }[]>);
   const total = sections.reduce((n, [, arr]) => n + arr.length, 0);
@@ -25,17 +25,17 @@ export default async function FmhyPage() {
         <a href="/providers" className="rounded-full border border-[#1c2534] bg-[#0c111b] px-4 py-2.5 text-white hover:border-[#ff4d00]">← Providers</a>
       </nav>
       <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff4d00]">
-        Sources / FMHY · auto-sync · {total} entries
+        Sources / Community index · auto-sync · {total} entries
       </p>
       <h1 className="mt-2 text-3xl font-black tracking-tight text-white md:text-5xl">
-        FMHY free AI, mirrored + checked.
+        Community free AI, tracked daily.
       </h1>
       <p className="mt-3 max-w-2xl text-sm text-[#8b98ad]">
-        This page re-copies{" "}
-        <a className="text-[#00e5a0] hover:underline" href="https://fmhy.pages.dev/ai" target="_blank" rel="noreferrer">
-          FMHY&apos;s AI wiki ↗
-        </a>{" "}
-        every 6 hours via cron. Mostly <strong className="text-white">chat frontends, not APIs</strong> — still the best hunting ground for new free routes and bridges. Synced {data.fetchedAt.slice(0, 10)}. Community wiki: verify each site&apos;s ToS yourself.
+        A rolling index of free AI chat sites, official model studios, and agents, re-synced from
+        community-maintained public wikis every 6 hours. Mostly{" "}
+        <strong className="text-white">chat frontends, not APIs</strong> — the best hunting ground
+        for new free routes and bridges. Snapshot {data.fetchedAt.slice(0, 10)}. Community data:
+        verify each site&apos;s ToS yourself.
       </p>
 
       {sections.map(([section, arr]) => (

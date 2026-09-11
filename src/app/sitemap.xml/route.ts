@@ -12,7 +12,7 @@ export async function GET() {
       { loc: `${SITE_URL}/models`, lastmod: day, changefreq: "daily", priority: 0.95 },
       { loc: `${SITE_URL}/promos`, lastmod: day, changefreq: "daily", priority: 0.9 },
       { loc: `${SITE_URL}/promos/1-dollar-deals`, lastmod: day, changefreq: "daily", priority: 0.9 },
-      { loc: `${SITE_URL}/sources/fmhy`, lastmod: day, changefreq: "daily", priority: 0.7 },
+      { loc: `${SITE_URL}/sources/community-index`, lastmod: day, changefreq: "daily", priority: 0.7 },
       { loc: `${SITE_URL}/dev`, lastmod: day, changefreq: "weekly", priority: 0.3 },
     ])
   );

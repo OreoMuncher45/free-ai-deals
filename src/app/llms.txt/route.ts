@@ -52,7 +52,7 @@ export async function GET() {
   lines.push(`## Promos`);
   lines.push(`- All promos: ${SITE_URL}/promos`);
   lines.push(`- $1 deals ranked: ${SITE_URL}/promos/1-dollar-deals`);
-  lines.push(`- FMHY mirror (auto-synced every 6h): ${SITE_URL}/sources/fmhy`);
+  lines.push(`- Community index (auto-synced every 6h): ${SITE_URL}/sources/community-index`);
   lines.push(`- Dev console + freshness ledger: ${SITE_URL}/dev`);
   lines.push(``);
   lines.push(

@@ -1,22 +1,22 @@
-export type FmhyEntry = {
+export type CommunityEntry = {
   name: string;
   url: string;
   note: string;
   section: string;
 };
 
-export type FmhySync = {
+export type CommunitySync = {
   source: string;
   fetchedAt: string;
-  sections: Record<string, FmhyEntry[]>;
+  sections: Record<string, CommunityEntry[]>;
   parseOk: boolean;
   error?: string;
 };
 
-const SOURCE_URL = "https://fmhy.pages.dev/ai";
+const SOURCE_URL = process.env.COMMUNITY_SOURCE_URL ?? "";
 
-// Sections of the FMHY AI wiki worth mirroring. Chat frontends are kept
-// too (labeled chat-only) — they rank the keywords and some ship bridges.
+// Sections of the community wiki worth mirroring. Chat frontends are kept
+// too — they rank the keywords and some ship bridges.
 const WANTED: Record<string, string> = {
   "official-model-sites": "Official model sites",
   "multiple-model-sites": "Multiple model sites",
@@ -38,7 +38,7 @@ function stripTags(s: string): string {
     .trim();
 }
 
-function parseSection(html: string, sectionId: string, label: string): FmhyEntry[] {
+function parseSection(html: string, sectionId: string, label: string): CommunityEntry[] {
   // VitePress renders headings as <h2 id="..." ...> or <h3 id="...">.
   const headRe = new RegExp(`<h[23][^>]*id="${sectionId}"[^>]*>`, "i");
   const head = html.search(headRe);
@@ -47,7 +47,7 @@ function parseSection(html: string, sectionId: string, label: string): FmhyEntry
   // section ends at the next h2 (h3s belong to the same section)
   const nextH2 = tail.slice(10).search(/<h2[\s>]/i);
   const body = nextH2 < 0 ? tail : tail.slice(0, nextH2 + 10);
-  const out: FmhyEntry[] = [];
+  const out: CommunityEntry[] = [];
   for (const li of body.match(/<li[\s\S]*?<\/li>/gi) ?? []) {
     const a = li.match(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i);
     if (!a) continue;
@@ -63,16 +63,19 @@ function parseSection(html: string, sectionId: string, label: string): FmhyEntry
   return out;
 }
 
-export async function fetchFmhy(): Promise<FmhySync> {
+export async function fetchCommunity(): Promise<CommunitySync> {
   const fetchedAt = new Date().toISOString();
+  if (!SOURCE_URL) {
+    return { source: "community-snapshot", fetchedAt, sections: {}, parseOk: false, error: "sync source not configured" };
+  }
   try {
     const res = await fetch(SOURCE_URL, {
-      headers: { "User-Agent": "FreeModels-sync/1.0 (+https://free-ai-deals.vercel.app)" },
+      headers: { "User-Agent": "FreeModels-sync/1.0" },
       next: { revalidate: 21600 },
     });
     if (!res.ok) throw new Error(`upstream ${res.status}`);
     const html = await res.text();
-    const sections: Record<string, FmhyEntry[]> = {};
+    const sections: Record<string, CommunityEntry[]> = {};
     for (const [id, label] of Object.entries(WANTED)) {
       const entries = parseSection(html, id, label);
       if (entries.length) sections[label] = entries;
