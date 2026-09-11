@@ -60,6 +60,7 @@ function Masthead() {
         </a>
         <nav className="hidden items-center gap-6 font-mono text-[12px] uppercase tracking-wider text-[#8b98ad] md:flex">
           <a className="min-h-[44px] content-center hover:text-white" href="/providers">Providers</a>
+          <a className="min-h-[44px] content-center hover:text-white" href="/models">Models</a>
           <a className="min-h-[44px] content-center hover:text-white" href="/promos">Promos</a>
           <a className="min-h-[44px] content-center text-[#ff4d00] hover:text-white" href="/promos/1-dollar-deals">$1 deals</a>
           <a className="min-h-[44px] content-center hover:text-white" href="/dev">Dev</a>
@@ -88,6 +89,7 @@ function Footer() {
           <p className="uppercase tracking-widest text-[#8b98ad]">Index</p>
           <ul className="mt-2 space-y-2">
             <li><a className="block py-1 hover:text-white hover:underline" href="/providers">All providers</a></li>
+            <li><a className="block py-1 hover:text-white hover:underline" href="/models">All models</a></li>
             <li><a className="block py-1 hover:text-white hover:underline" href="/promos">Promotions</a></li>
             <li><a className="block py-1 hover:text-white hover:underline" href="/promos/1-dollar-deals">$1 deals</a></li>
             <li><a className="block py-1 hover:text-white hover:underline" href="/sitemap-index.xml">Sitemap index</a></li>

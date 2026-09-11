@@ -52,7 +52,10 @@ export default function Home() {
             real calls, death alerts kept. Free on top, $1 deals below.
           </p>
           <div className="mt-6 flex flex-col gap-3 font-mono text-[12px] sm:flex-row">
-            <a href="/providers" className="bg-[#ff4d00] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">
+            <a href="/models" className="bg-[#ff4d00] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">
+              Free GPT · Astra · Fable 5 — model pages
+            </a>
+            <a href="/providers" className="border border-[#1c2534] bg-[#0c111b] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
               Browse {providers.length} providers
             </a>
             <a href="/promos/1-dollar-deals" className="border border-[#1c2534] bg-[#0c111b] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
@@ -72,6 +75,22 @@ export default function Home() {
               </div>
             ))}
           </dl>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="border-b border-[#1c2534] bg-black">
+        <div className="mx-auto grid max-w-6xl gap-px px-4 py-8 sm:grid-cols-3">
+          {[
+            ["1 · Pick", "Free providers on top, $1 deals below. Status + last-checked date on every card."],
+            ["2 · Details", "Tap a title for limits from docs, verification steps, models, base URL + curl."],
+            ["3 · Sign up official", "Buttons go to the provider's own site. We never see your keys."],
+          ].map(([t, d]) => (
+            <div key={t} className="px-2">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#00e5a0]">{t}</p>
+              <p className="mt-1 text-sm text-[#8b98ad]">{d}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -147,9 +166,15 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-4">
         <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#8b98ad]">What people search</h2>
         <ul className="mt-2 flex flex-wrap gap-2 font-mono text-[11px]">
-          {["free ai models", "free ai api", "free llm api", "deepseek free api no card", "qwen coder free api", "openai compatible free api", "$1 ai api"].map((k) => (
-            <li key={k} className="border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#8b98ad]">{k}</li>
-          ))}
+          <li><a href="/models/gpt-6-astra-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free astra</a></li>
+          <li><a href="/models/gpt-6-astra-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gpt 6</a></li>
+          <li><a href="/models/claude-fable-5-1-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free fable 5</a></li>
+          <li><a href="/models/claude-fable-5-1-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free fable 5.1</a></li>
+          <li><a href="/models/deepseek-v4-flash-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free deepseek</a></li>
+          <li><a href="/models/qwen3-coder-plus-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free qwen coder</a></li>
+          <li><a href="/models/gpt-56-luna-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gpt luna</a></li>
+          <li><a href="/models/gemini-flash-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gemini</a></li>
+          <li><a href="/models" className="block border border-[#ff4d00] bg-[#0c111b] px-2 py-1.5 text-white hover:bg-[#ff4d00]">all free models →</a></li>
         </ul>
       </section>
     </main>
