@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
 import { providers, SITE_URL } from "@/data/providers";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Dynamic: hourly revalidation from live data.
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return providers.map((p) => ({
     url: `${SITE_URL}/providers/${p.slug}`,
     lastModified: new Date(p.lastChecked),

@@ -1,6 +1,12 @@
-import { SITE_URL } from "@/data/providers";
+import { indexXml, REVALIDATE_SECONDS } from "@/lib/sitemaps";
+
+export const revalidate = REVALIDATE_SECONDS;
 
 export async function GET() {
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>${SITE_URL}/sitemap.xml</loc></sitemap>\n  <sitemap><loc>${SITE_URL}/providers/sitemap.xml</loc></sitemap>\n  <sitemap><loc>${SITE_URL}/models/sitemap.xml</loc></sitemap>\n  <sitemap><loc>${SITE_URL}/promos/sitemap.xml</loc></sitemap>\n</sitemapindex>`;
-  return new Response(xml, { headers: { "Content-Type": "application/xml" } });
+  return new Response(indexXml(), {
+    headers: {
+      "Content-Type": "application/xml",
+      "Cache-Control": `public, max-age=${REVALIDATE_SECONDS}, stale-while-revalidate=86400`,
+    },
+  });
 }
