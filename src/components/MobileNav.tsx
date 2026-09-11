@@ -19,12 +19,12 @@ export default function MobileNav() {
         aria-expanded={open}
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((v) => !v)}
-        className="flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#1c2534] bg-[#0c111b] px-3 font-mono text-sm text-[#e8eef6]"
+        className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[#1c2534] bg-[#0c111b] px-3 font-mono text-sm text-[#e8eef6]"
       >
         {open ? "✕" : "☰"}
       </button>
       {open && (
-        <div className="absolute inset-x-0 top-full z-50 border-b border-[#1c2534] bg-[#0c111b]">
+        <div className="absolute inset-x-0 top-full z-50 overflow-hidden rounded-b-2xl border-b border-[#1c2534] bg-[#0c111b]">
           {LINKS.map((l) => (
             <a
               key={l.href}

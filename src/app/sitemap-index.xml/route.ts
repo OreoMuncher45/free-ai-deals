@@ -1,6 +1,6 @@
 import { indexXml, REVALIDATE_SECONDS } from "@/lib/sitemaps";
 
-export const revalidate = REVALIDATE_SECONDS;
+export const revalidate = 3600;
 
 export async function GET() {
   return new Response(indexXml(), {

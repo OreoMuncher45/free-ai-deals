@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 function BackBar() {
   return (
     <nav aria-label="Back" className="flex flex-wrap gap-2 font-mono text-[12px]">
-      <a href="/" className="border border-[#1c2534] bg-[#0c111b] px-3 py-2.5 text-white hover:border-[#ff4d00]">⌂ Home</a>
-      <a href="/providers" className="border border-[#1c2534] bg-[#0c111b] px-3 py-2.5 text-white hover:border-[#ff4d00]">← All providers</a>
+      <a href="/" className="border border-[#1c2534] bg-[#0c111b] rounded-full px-3 py-2.5 text-white hover:border-[#ff4d00]">⌂ Home</a>
+      <a href="/providers" className="border border-[#1c2534] bg-[#0c111b] rounded-full px-3 py-2.5 text-white hover:border-[#ff4d00]">← All providers</a>
     </nav>
   );
 }
@@ -41,9 +41,35 @@ export default async function ProviderPage({ params }: { params: Promise<{ slug:
     url: p.siteUrl,
   };
 
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Providers", item: `${SITE_URL}/providers` },
+      { "@type": "ListItem", position: 3, name: p.name, item: `${SITE_URL}/providers/${p.slug}` },
+    ],
+  };
+  const faqLd =
+    p.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: p.faq.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }
+      : null;
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-6 md:py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      {faqLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      )}
       <BackBar />
       <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#8b98ad]">
         Providers / {p.slug}
@@ -58,15 +84,15 @@ export default async function ProviderPage({ params }: { params: Promise<{ slug:
 
       {/* primary actions — Website + Direct signup, always visible */}
       <div className="mt-5 flex flex-col gap-2 font-mono text-[13px] sm:flex-row">
-        <a href={p.siteUrl} target="_blank" rel="noreferrer" className="border border-[#1c2534] bg-[#0c111b] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
+        <a href={p.siteUrl} target="_blank" rel="noreferrer" className="border border-[#1c2534] bg-[#0c111b] rounded-full px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
           Website ↗
         </a>
-        <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">
+        <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] rounded-full px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">
           Direct signup ↗
         </a>
       </div>
 
-      <div className="mt-6 grid gap-px border border-[#1c2534] bg-[#1c2534] md:grid-cols-3">
+      <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#1c2534] bg-[#1c2534] md:grid-cols-3">
         <div className="bg-[#0c111b] p-4">
           <h2 className="font-mono text-[11px] uppercase tracking-widest text-[#8b98ad]">Free allowance (from docs)</h2>
           <p className="mt-2 text-sm leading-snug text-[#e8eef6]">{p.freeAllowance}</p>
@@ -96,21 +122,21 @@ export default async function ProviderPage({ params }: { params: Promise<{ slug:
       {p.models.length > 0 && (
         <section className="mt-8">
           <h2 className="border-b-2 border-[#ff4d00] pb-2 text-xl font-black text-white">Models ({p.models.length} listed)</h2>
-          <div className="mt-4 overflow-x-auto border border-[#1c2534]">
+          <div className="mt-4 overflow-x-auto rounded-xl border border-[#1c2534]">
             <table className="w-full min-w-[560px] border-collapse bg-[#0c111b] font-mono text-[12px]">
               <thead>
                 <tr className="bg-black text-left text-white">
-                  <th className="border border-[#1c2534] px-3 py-2.5">Model id</th>
-                  <th className="border border-[#1c2534] px-3 py-2.5">Context</th>
-                  <th className="hidden border border-[#1c2534] px-3 py-2.5 md:table-cell">Note</th>
+                  <th className="border border-[#1c2534] rounded-full px-3 py-2.5">Model id</th>
+                  <th className="border border-[#1c2534] rounded-full px-3 py-2.5">Context</th>
+                  <th className="hidden border border-[#1c2534] rounded-full px-3 py-2.5 md:table-cell">Note</th>
                 </tr>
               </thead>
               <tbody>
                 {p.models.map((m) => (
                   <tr key={m.id} className="hover:bg-[#101724]">
-                    <td className="tnum border border-[#1c2534] px-3 py-2.5 font-bold text-[#00e5a0]">{m.id}</td>
-                    <td className="tnum border border-[#1c2534] px-3 py-2.5">{m.context}</td>
-                    <td className="hidden border border-[#1c2534] px-3 py-2.5 text-[#8b98ad] md:table-cell">{m.note ?? "—"}</td>
+                    <td className="tnum border border-[#1c2534] rounded-full px-3 py-2.5 font-bold text-[#00e5a0]">{m.id}</td>
+                    <td className="tnum border border-[#1c2534] rounded-full px-3 py-2.5">{m.context}</td>
+                    <td className="hidden border border-[#1c2534] rounded-full px-3 py-2.5 text-[#8b98ad] md:table-cell">{m.note ?? "—"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -122,21 +148,21 @@ export default async function ProviderPage({ params }: { params: Promise<{ slug:
       <section className="mt-8 grid gap-6 md:grid-cols-2">
         <div className="min-w-0">
           <h2 className="border-b-2 border-[#ff4d00] pb-2 text-xl font-black text-white">Connect</h2>
-          <pre className="tnum mt-4 overflow-x-auto border border-[#1c2534] bg-black p-4 font-mono text-[11px] leading-relaxed text-[#00e5a0]">{p.curlExample}</pre>
+          <pre className="tnum mt-4 overflow-x-auto rounded-xl border border-[#1c2534] bg-black p-4 font-mono text-[11px] leading-relaxed text-[#00e5a0]">{p.curlExample}</pre>
           <div className="mt-3 flex flex-wrap gap-2 font-mono text-[11px]">
-            <a className="border border-[#1c2534] bg-[#0c111b] px-2.5 py-2.5 text-white hover:border-[#ff4d00]" href={p.docsUrl} target="_blank" rel="noreferrer">Docs ↗</a>
-            <a className="border border-[#1c2534] bg-[#0c111b] px-2.5 py-2.5 text-white hover:border-[#ff4d00]" href={p.pricingUrl} target="_blank" rel="noreferrer">Pricing ↗</a>
-            <a className="border border-[#1c2534] bg-[#0c111b] px-2.5 py-2.5 text-white hover:border-[#ff4d00]" href={p.siteUrl} target="_blank" rel="noreferrer">Website ↗</a>
+            <a className="border border-[#1c2534] bg-[#0c111b] rounded-full px-2.5 py-2.5 text-white hover:border-[#ff4d00]" href={p.docsUrl} target="_blank" rel="noreferrer">Docs ↗</a>
+            <a className="border border-[#1c2534] bg-[#0c111b] rounded-full px-2.5 py-2.5 text-white hover:border-[#ff4d00]" href={p.pricingUrl} target="_blank" rel="noreferrer">Pricing ↗</a>
+            <a className="border border-[#1c2534] bg-[#0c111b] rounded-full px-2.5 py-2.5 text-white hover:border-[#ff4d00]" href={p.siteUrl} target="_blank" rel="noreferrer">Website ↗</a>
           </div>
         </div>
         <div>
           <h2 className="border-b-2 border-[#ff4d00] pb-2 text-xl font-black text-white">Verdict</h2>
           <div className="mt-4 grid gap-4">
-            <div className="border border-[#1c2534] bg-[#0c111b] p-4">
+            <div className="rounded-2xl border border-[#1c2534] bg-[#0c111b] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-widest text-[#00e5a0]">Good</h3>
               <ul className="mt-2 list-disc pl-5 text-sm text-[#e8eef6]">{p.pros.map((x) => <li key={x}>{x}</li>)}</ul>
             </div>
-            <div className="border border-[#1c2534] bg-[#0c111b] p-4">
+            <div className="rounded-2xl border border-[#1c2534] bg-[#0c111b] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-widest text-red-400">Catches</h3>
               <ul className="mt-2 list-disc pl-5 text-sm text-[#e8eef6]">{p.cons.map((x) => <li key={x}>{x}</li>)}</ul>
             </div>
@@ -149,7 +175,7 @@ export default async function ProviderPage({ params }: { params: Promise<{ slug:
           <h2 className="border-b-2 border-[#ff4d00] pb-2 text-xl font-black text-white">FAQ</h2>
           <div className="mt-4 space-y-3">
             {p.faq.map((f) => (
-              <details key={f.q} className="border border-[#1c2534] bg-[#0c111b] p-4">
+              <details key={f.q} className="rounded-2xl border border-[#1c2534] bg-[#0c111b] p-4">
                 <summary className="cursor-pointer min-h-[44px] font-bold text-white">{f.q}</summary>
                 <p className="mt-2 text-sm text-[#8b98ad]">{f.a}</p>
               </details>
@@ -168,9 +194,9 @@ export default async function ProviderPage({ params }: { params: Promise<{ slug:
       </section>
 
       <div className="mt-10 flex flex-col gap-2 border-t border-[#1c2534] pt-6 font-mono text-[12px] sm:flex-row">
-        <a href="/" className="border border-[#1c2534] px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">⌂ Back to homepage</a>
-        <a href="/providers" className="border border-[#1c2534] px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">← All providers</a>
-        <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] px-4 py-3.5 text-center font-bold text-white hover:bg-white hover:text-black">Direct signup ↗</a>
+        <a href="/" className="border border-[#1c2534] rounded-full px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">⌂ Back to homepage</a>
+        <a href="/providers" className="border border-[#1c2534] rounded-full px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">← All providers</a>
+        <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] rounded-full px-4 py-3.5 text-center font-bold text-white hover:bg-white hover:text-black">Direct signup ↗</a>
       </div>
     </main>
   );

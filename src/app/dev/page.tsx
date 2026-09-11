@@ -1,12 +1,20 @@
-import { providers, LAST_CRAWL, keywords } from "@/data/providers";
+import { providers, LAST_CRAWL, keywords, SITE_URL } from "@/data/providers";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dev console — sitemap, freshness, keywords",
+  description: "FreeModels dev console: sitemap index, freshness ledger, machine APIs, keyword backlog.",
+  alternates: { canonical: `${SITE_URL}/dev` },
+  robots: { index: false, follow: true },
+};
 
 export default function DevConsole() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-6 md:py-10">
-      <a href="/" className="inline-block border border-[#1c2534] bg-[#0c111b] px-3 py-2.5 font-mono text-[12px] text-white hover:border-[#ff4d00]">⌂ Home</a>
+      <a href="/" className="inline-block rounded-full border border-[#1c2534] bg-[#0c111b] px-4 py-2.5 font-mono text-[12px] text-white hover:border-[#ff4d00]">⌂ Home</a>
       <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff4d00]">Dev console · sitemap + freshness</p>
       <h1 className="mt-2 text-3xl font-black tracking-tight text-white">Dev console</h1>
-      <div className="mt-6 grid gap-px border border-[#1c2534] bg-[#1c2534] sm:grid-cols-3">
+      <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#1c2534] bg-[#1c2534] sm:grid-cols-3">
         <div className="bg-[#0c111b] p-4 font-mono text-[12px] text-[#e8eef6]">
           <h2 className="uppercase tracking-widest text-[#8b98ad]">Build</h2>
           <ul className="tnum mt-2 space-y-1.5">
@@ -37,7 +45,7 @@ export default function DevConsole() {
       </div>
 
       <h2 className="mt-8 border-b-2 border-[#ff4d00] pb-2 text-xl font-black text-white">Freshness ledger</h2>
-      <div className="mt-4 overflow-x-auto border border-[#1c2534]">
+      <div className="mt-4 overflow-x-auto rounded-xl border border-[#1c2534]">
         <table className="w-full min-w-[520px] border-collapse bg-[#0c111b] font-mono text-[12px]">
           <thead>
             <tr className="bg-black text-left text-white">
@@ -62,7 +70,7 @@ export default function DevConsole() {
       <p className="mt-2 font-mono text-[12px] text-[#8b98ad]">
         Semrush + Ahrefs need paid API keys / JS logins — blocked without them. Camoufox present but browser fetch not provisioned. Drop SEMRUSH_API_KEY / AHREFS_API_KEY in Vercel env to enable nightly KD pulls. Seed list below ships in repo.
       </p>
-      <div className="mt-4 overflow-x-auto border border-[#1c2534]">
+      <div className="mt-4 overflow-x-auto rounded-xl border border-[#1c2534]">
         <table className="w-full min-w-[520px] border-collapse bg-[#0c111b] font-mono text-[12px]">
           <thead>
             <tr className="bg-black text-left text-white">

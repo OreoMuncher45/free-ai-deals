@@ -30,6 +30,36 @@ export function childSitemaps(): ChildSitemap[] {
   ];
 }
 
+export type UrlEntry = {
+  loc: string;
+  lastmod: string;
+  changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
+  priority?: number;
+};
+
+// Dynamic sitemap XML builder. Route handlers below call this at request
+// time (ISR, revalidated hourly), so content follows the data — no rebuild.
+export function sitemapXml(entries: UrlEntry[]): string {
+  const rows = entries
+    .map(
+      (e) =>
+        `  <url><loc>${e.loc}</loc><lastmod>${e.lastmod}</lastmod>` +
+        (e.changefreq ? `<changefreq>${e.changefreq}</changefreq>` : "") +
+        (e.priority !== undefined ? `<priority>${e.priority}</priority>` : "") +
+        `</url>`
+    )
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows}\n</urlset>`;
+}
+
+export function xmlResponse(xml: string) {
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml",
+      "Cache-Control": `public, max-age=${REVALIDATE_SECONDS}, stale-while-revalidate=86400`,
+    },
+  });
+}
 export function indexXml(): string {
   const rows = childSitemaps()
     .map(

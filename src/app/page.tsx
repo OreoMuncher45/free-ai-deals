@@ -1,4 +1,12 @@
-import { providers, promos, LAST_CRAWL } from "@/data/providers";
+import { providers, promos, LAST_CRAWL, SITE_URL } from "@/data/providers";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Free AI models + $1 deals — every free route, verified daily",
+  description:
+    "FreeModels: 12 free AI providers, 60+ free models, $1 promos with expiry. xKiro 5M/day, Experiential $1 verification, Groq, Gemini free. Limits from docs, official signup links.",
+  alternates: { canonical: SITE_URL },
+};
 
 function StatusPill({ status }: { status: string }) {
   const map: Record<string, string> = {
@@ -10,7 +18,7 @@ function StatusPill({ status }: { status: string }) {
     "live-capped": "bg-amber-500 text-black",
   };
   return (
-    <span className={`inline-block px-1.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest ${map[status] ?? "bg-zinc-600 text-white"}`}>
+    <span className={`inline-block rounded-full px-1.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest ${map[status] ?? "bg-zinc-600 text-white"}`}>
       {status}
     </span>
   );
@@ -35,11 +43,34 @@ export default function Home() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                name: "FreeModels",
+                url: SITE_URL,
+                description: "Lead-only directory of free AI models and $1 API promos.",
+              },
+              {
+                "@type": "WebSite",
+                name: "FreeModels",
+                url: SITE_URL,
+                inLanguage: "en",
+              },
+            ],
+          }),
+        }}
+      />
       <Ticker />
 
       {/* hero — terminal broadsheet, dark */}
-      <section className="grid-bg border-b border-[#1c2534]">
-        <div className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+      <section className="relative overflow-hidden border-b border-[#1c2534]">
+        <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
+        <div className="relative mx-auto max-w-6xl px-4 py-10 md:py-14">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff4d00]">
             No. 01 — Free AI models, verified {LAST_CRAWL.slice(0, 10)}
           </p>
@@ -52,13 +83,13 @@ export default function Home() {
             real calls, death alerts kept. Free on top, $1 deals below.
           </p>
           <div className="mt-6 flex flex-col gap-3 font-mono text-[12px] sm:flex-row">
-            <a href="/models" className="bg-[#ff4d00] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">
+            <a href="/models" className="bg-[#ff4d00] rounded-full px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">
               Free GPT · Astra · Fable 5 — model pages
             </a>
-            <a href="/providers" className="border border-[#1c2534] bg-[#0c111b] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
+            <a href="/providers" className="border border-[#1c2534] bg-[#0c111b] rounded-full px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
               Browse {providers.length} providers
             </a>
-            <a href="/promos/1-dollar-deals" className="border border-[#1c2534] bg-[#0c111b] px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
+            <a href="/promos/1-dollar-deals" className="border border-[#1c2534] bg-[#0c111b] rounded-full px-4 py-3.5 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">
               $1 deals ({promos.length})
             </a>
           </div>
@@ -100,7 +131,7 @@ export default function Home() {
           <h2 className="text-lg font-black tracking-tight text-white md:text-xl">01 · Free, no card on most</h2>
           <a href="/providers" className="min-h-[44px] content-center font-mono text-[12px] uppercase tracking-wider text-[#8b98ad] hover:text-white hover:underline">All →</a>
         </div>
-        <div className="mt-6 grid gap-px border border-[#1c2534] bg-[#1c2534] sm:grid-cols-2">
+        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#1c2534] bg-[#1c2534] sm:grid-cols-2">
           {free.map((p, i) => (
             <article key={p.slug} className="bg-[#0c111b] p-5">
               <div className="flex items-start justify-between gap-3">
@@ -116,8 +147,8 @@ export default function Home() {
               </div>
               <p className="mt-3 border-l-2 border-[#ff4d00] pl-3 text-sm font-medium leading-snug text-[#e8eef6]">{p.headline}</p>
               <div className="mt-4 flex flex-col gap-2 font-mono text-[12px] sm:flex-row">
-                <a href={`/providers/${p.slug}`} className="border border-[#1c2534] px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">More details →</a>
-                <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">Direct signup ↗</a>
+                <a href={`/providers/${p.slug}`} className="border border-[#1c2534] rounded-full px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">More details →</a>
+                <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] rounded-full px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">Direct signup ↗</a>
               </div>
               <p className="tnum mt-3 font-mono text-[10px] uppercase tracking-wider text-[#8b98ad]">
                 Checked {p.lastChecked.slice(0, 10)} · {p.models.length} models listed
@@ -134,7 +165,7 @@ export default function Home() {
             <h2 className="text-lg font-black tracking-tight text-white md:text-xl">02 · $1 deals & trials</h2>
             <a href="/promos/1-dollar-deals" className="min-h-[44px] content-center font-mono text-[12px] uppercase tracking-wider text-[#8b98ad] hover:text-white hover:underline">All promos →</a>
           </div>
-          <div className="mt-6 grid gap-px border border-[#1c2534] bg-[#1c2534] sm:grid-cols-2">
+          <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#1c2534] bg-[#1c2534] sm:grid-cols-2">
             {deals.map((p) => (
               <article key={p.slug} className="bg-[#0c111b] p-5">
                 <div className="flex items-start justify-between gap-3">
@@ -146,8 +177,8 @@ export default function Home() {
                 <p className="mt-1 font-mono text-[12px] font-bold text-[#ff4d00]">{p.tierLabel}</p>
                 <p className="mt-2 text-sm leading-snug text-[#e8eef6]">{p.headline}</p>
                 <div className="mt-4 flex flex-col gap-2 font-mono text-[12px] sm:flex-row">
-                  <a href={`/providers/${p.slug}`} className="border border-[#1c2534] px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">More details →</a>
-                  <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">Direct signup ↗</a>
+                  <a href={`/providers/${p.slug}`} className="border border-[#1c2534] rounded-full px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">More details →</a>
+                  <a href={p.signupUrl} target="_blank" rel="noreferrer" className="bg-[#ff4d00] rounded-full px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black">Direct signup ↗</a>
                 </div>
               </article>
             ))}
@@ -166,14 +197,14 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-4">
         <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#8b98ad]">What people search</h2>
         <ul className="mt-2 flex flex-wrap gap-2 font-mono text-[11px]">
-          <li><a href="/models/gpt-6-astra-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free astra</a></li>
-          <li><a href="/models/gpt-6-astra-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gpt 6</a></li>
-          <li><a href="/models/claude-fable-5-1-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free fable 5</a></li>
-          <li><a href="/models/claude-fable-5-1-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free fable 5.1</a></li>
-          <li><a href="/models/deepseek-v4-flash-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free deepseek</a></li>
-          <li><a href="/models/qwen3-coder-plus-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free qwen coder</a></li>
-          <li><a href="/models/gpt-56-luna-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gpt luna</a></li>
-          <li><a href="/models/gemini-flash-free" className="block border border-[#1c2534] bg-[#0c111b] px-2 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gemini</a></li>
+          <li><a href="/models/gpt-6-astra-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free astra</a></li>
+          <li><a href="/models/gpt-6-astra-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gpt 6</a></li>
+          <li><a href="/models/claude-fable-5-1-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free fable 5</a></li>
+          <li><a href="/models/claude-fable-5-1-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free fable 5.1</a></li>
+          <li><a href="/models/deepseek-v4-flash-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free deepseek</a></li>
+          <li><a href="/models/qwen3-coder-plus-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free qwen coder</a></li>
+          <li><a href="/models/gpt-56-luna-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gpt luna</a></li>
+          <li><a href="/models/gemini-flash-free" className="block rounded-full border border-[#1c2534] bg-[#0c111b] px-3 py-1.5 text-[#00e5a0] hover:border-[#ff4d00]">free gemini</a></li>
           <li><a href="/models" className="block border border-[#ff4d00] bg-[#0c111b] px-2 py-1.5 text-white hover:bg-[#ff4d00]">all free models →</a></li>
         </ul>
       </section>

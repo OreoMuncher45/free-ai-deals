@@ -15,17 +15,19 @@ export const metadata: Metadata = {
   },
   description:
     "Directory of free AI models and $1 API promos. Live limits, verification steps, base URLs and curl examples. No keys, just official links. Re-verified daily.",
-  keywords: [
-    "free ai models",
-    "free ai api",
-    "free llm api",
-    "deepseek free api",
-    "openai compatible free api",
-    "$1 ai api",
-  ],
+  authors: [{ name: "FreeModels" }],
+  creator: "FreeModels",
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     type: "website",
     siteName: "FreeModels",
+    locale: "en_US",
+    title: "FreeModels — Every free AI model, verified daily",
+    description:
+      "Free providers + $1 promos. Limits, verification, base URLs. No keys, just official links.",
+  },
+  twitter: {
+    card: "summary",
     title: "FreeModels — Every free AI model, verified daily",
     description:
       "Free providers + $1 promos. Limits, verification, base URLs. No keys, just official links.",
@@ -81,7 +83,7 @@ function Footer() {
             Lead-only directory. We never issue, store, or proxy API keys. All
             links go to official provider signup.
           </p>
-          <a href="/" className="mt-4 inline-block border border-[#1c2534] px-3 py-2.5 font-mono text-[12px] uppercase tracking-wider text-white hover:border-[#ff4d00]">
+          <a href="/" className="mt-4 inline-block border border-[#1c2534] rounded-full px-3 py-2.5 font-mono text-[12px] uppercase tracking-wider text-white hover:border-[#ff4d00]">
             ⌂ Back to homepage
           </a>
         </div>

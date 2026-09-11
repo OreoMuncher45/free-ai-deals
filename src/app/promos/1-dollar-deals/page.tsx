@@ -1,9 +1,10 @@
-import { providers } from "@/data/providers";
+import { providers, SITE_URL } from "@/data/providers";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "$1 AI deals — verification, credits, expiry",
   description: "$1 AI API deals: Experiential Labs verification, Command Code, Fireworks, Together. What $1 unlocks, card/phone needs, expiry.",
+  alternates: { canonical: `${SITE_URL}/promos/1-dollar-deals` },
 };
 
 const deals = [
@@ -47,13 +48,13 @@ export default function DollarDeals() {
   const checked = providers.find((p) => p.slug === "experiential-labs")?.lastChecked ?? "";
   return (
     <main className="mx-auto max-w-6xl px-4 py-6 md:py-10">
-      <a href="/" className="inline-block border border-[#1c2534] bg-[#0c111b] px-3 py-2.5 font-mono text-[12px] text-white hover:border-[#ff4d00]">⌂ Home</a>
+      <a href="/" className="inline-block rounded-full border border-[#1c2534] bg-[#0c111b] px-4 py-2.5 font-mono text-[12px] text-white hover:border-[#ff4d00]">⌂ Home</a>
       <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff4d00]">Promos / $1 deals · checked {checked.slice(0, 10)}</p>
       <h1 className="mt-2 text-3xl font-black tracking-tight text-white md:text-5xl">$1 deals, ranked by what $1 buys.</h1>
       <p className="mt-3 max-w-2xl text-sm text-[#8b98ad]">
         Free tiers first elsewhere — this page is paid micro-promos only. Every deal links to its provider page (full verification + limits) and the official claim page.
       </p>
-      <div className="mt-8 space-y-px border border-[#1c2534] bg-[#1c2534]">
+      <div className="mt-8 space-y-px overflow-hidden rounded-2xl border border-[#1c2534] bg-[#1c2534]">
         {deals.map((d, i) => (
           <article key={d.name} className="grid gap-4 bg-[#0c111b] p-5 md:grid-cols-[60px_1fr_auto]">
             <span className="tnum font-mono text-3xl font-black text-[#1c2534]">{String(i + 1).padStart(2, "0")}</span>
@@ -66,21 +67,21 @@ export default function DollarDeals() {
               </dl>
             </div>
             <div className="flex flex-col gap-2 font-mono text-[12px]">
-              <a href={d.to} className="border border-[#1c2534] px-4 py-3.5 text-center font-bold text-white hover:border-[#ff4d00]">More details →</a>
-              <a href={d.out} target="_blank" rel="noreferrer" className="bg-[#ff4d00] px-4 py-3.5 text-center font-bold text-white hover:bg-white hover:text-black">Claim ↗</a>
+              <a href={d.to} className="border border-[#1c2534] rounded-full px-4 py-3.5 text-center font-bold text-white hover:border-[#ff4d00]">More details →</a>
+              <a href={d.out} target="_blank" rel="noreferrer" className="bg-[#ff4d00] rounded-full px-4 py-3.5 text-center font-bold text-white hover:bg-white hover:text-black">Claim ↗</a>
             </div>
           </article>
         ))}
       </div>
-      <section className="mt-8 border border-[#ff4d00] bg-black p-5">
+      <section className="mt-8 rounded-2xl border border-[#ff4d00] bg-black p-5">
         <h2 className="font-mono text-[11px] uppercase tracking-widest text-[#ff4d00]">$1 math</h2>
         <p className="tnum mt-2 font-mono text-[12px] leading-relaxed text-[#e8eef6]">
           DeepSeek-Chat ~$0.28 in / $0.42 out per 1M → $1 ≈ 2–3M tokens. GLM-4.6v-flash $0.04 in → $1 ≈ 10M+ input-heavy tokens. xKiro free 5M/day ≈ $1.50–$4/day DeepSeek value, free.
         </p>
       </section>
       <div className="mt-8 flex flex-col gap-2 font-mono text-[12px] sm:flex-row">
-        <a href="/" className="border border-[#1c2534] px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">⌂ Back to homepage</a>
-        <a href="/promos" className="border border-[#1c2534] px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">← All promos</a>
+        <a href="/" className="border border-[#1c2534] rounded-full px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">⌂ Back to homepage</a>
+        <a href="/promos" className="border border-[#1c2534] rounded-full px-4 py-3.5 text-center text-white hover:border-[#ff4d00]">← All promos</a>
       </div>
     </main>
   );
