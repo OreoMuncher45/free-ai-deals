@@ -1,4 +1,5 @@
 import { providers, promos, LAST_CRAWL, SITE_URL } from "@/data/providers";
+import { models } from "@/data/models";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -158,11 +159,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* MODELS */}
+      <section className="mx-auto max-w-6xl px-4 py-10">
+        <div className="flex items-baseline justify-between border-b-2 border-[#ff4d00] pb-2">
+          <h2 className="text-lg font-black tracking-tight text-white md:text-xl">02 · Models — free GPT, Astra, Fable 5</h2>
+          <a href="/models" className="min-h-[44px] content-center font-mono text-[12px] uppercase tracking-wider text-[#8b98ad] hover:text-white hover:underline">All →</a>
+        </div>
+        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#1c2534] bg-[#1c2534] sm:grid-cols-2">
+          {models.map((m) => (
+            <article key={m.slug} className="bg-[#0c111b] p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-[#8b98ad]">{m.status.replace("-", " ")} · {m.context}</p>
+                  <h3 className="mt-1 text-lg font-black leading-tight text-white">
+                    <a href={`/models/${m.slug}`} className="hover:text-[#ff4d00] hover:underline">{m.name}</a>
+                  </h3>
+                  <p className="mt-1 font-mono text-[11px] text-[#00e5a0]">{m.aliases.slice(0, 3).join(" · ")}</p>
+                </div>
+              </div>
+              <div className="mt-4 flex flex-col gap-2 font-mono text-[12px] sm:flex-row">
+                <a href={`/models/${m.slug}`} className="rounded-full border border-[#1c2534] px-3 py-3 text-center font-bold uppercase tracking-wider text-white hover:border-[#ff4d00]">Where to use free →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* $1 DEALS */}
       <section className="border-y border-[#1c2534] bg-black">
         <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="flex items-baseline justify-between border-b-2 border-[#ff4d00] pb-2">
-            <h2 className="text-lg font-black tracking-tight text-white md:text-xl">02 · $1 deals & trials</h2>
+            <h2 className="text-lg font-black tracking-tight text-white md:text-xl">03 · $1 deals & trials</h2>
             <a href="/promos/1-dollar-deals" className="min-h-[44px] content-center font-mono text-[12px] uppercase tracking-wider text-[#8b98ad] hover:text-white hover:underline">All promos →</a>
           </div>
           <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#1c2534] bg-[#1c2534] sm:grid-cols-2">
