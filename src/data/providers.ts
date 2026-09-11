@@ -69,7 +69,7 @@ export const providers: Provider[] = [
     },
     lastChecked: "2026-09-11T02:00:00.000Z",
     status: "working",
-    statusNote: "Probed 2026-09-11: qwen-coder-plus, qwen-3.8-max, deepseek-v4-flash all returned 200. codex-spark flipped to 403 paid-only; minimax-m3:free rate-limited intermittently.",
+    statusNote: "Probed 2026-09-11: qwen-coder-plus, qwen-3.8-max, deepseek-v4-flash all 200. Gate is real — at 0 remaining, free calls 403/429 rate_limit_exceeded ('switch to a paid model or wait for reset'). Dashboard lifetime totals (e.g. 22M) are cumulative across days, not the daily pool. codex-spark flipped to 403 paid-only; minimax-m3:free rate-limits intermittently.",
     models: [
       { id: "qwen/qwen3-coder-plus:free", context: "1M", contextTokens: 1048576, note: "Best coder pick — zero reasoning dump" },
       { id: "qwen/qwen3.8-max:free", context: "1M", contextTokens: 1000000, note: "Newest max, concise" },
