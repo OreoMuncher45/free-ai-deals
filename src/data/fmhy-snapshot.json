@@ -1,0 +1,27 @@
+{
+  "source": "https://fmhy.pages.dev/ai",
+  "fetchedAt": "2026-09-11T02:00:00.000Z",
+  "sections": {
+    "Multiple model sites": [
+      { "name": "Together.ai", "url": "https://chat.together.ai/", "note": "GLM-5.3 / Kimi K3 / Qwen3.8 2.4T A95B / DeepSeek V4 Pro 0813 / Up To 110 Daily", "section": "Multiple model sites" },
+      { "name": "NVIDIA NIM", "url": "https://build.nvidia.com/models", "note": "Kimi K3 / DeepSeek V4 Pro 0813 / MiniMax M3 / Unlimited / No Sign-Up", "section": "Multiple model sites" },
+      { "name": "Tryingopen", "url": "https://www.tryingopen.com/", "note": "DeepSeek V4 Pro / Qwen3.8 27B / GLM-5.3-Flash / Unlimited (12 per chat)", "section": "Multiple model sites" },
+      { "name": "ISH", "url": "https://ish.chat/", "note": "Claude Opus 5 / GPT-5.6 Sol / Kimi K3 / 50K Tokens Daily", "section": "Multiple model sites" },
+      { "name": "Arena", "url": "https://arena.ai/text/direct", "note": "Multiple Models / Agent / Sign-Up, OpenAI bridge available", "section": "Multiple model sites" },
+      { "name": "ChatWave", "url": "https://chatwave.crunchflix.site/", "note": "Claude Opus 5 / Claude Fable 5 / GPT 6 Astra / GPT-5.6 Sol", "section": "Multiple model sites" },
+      { "name": "Lumo", "url": "https://lumo.proton.me/", "note": "Qwen3.5 122B A10B (Lite, 100 Daily) / GLM 5.2 (Max, 20 Daily) / Sign-Up", "section": "Multiple model sites" },
+      { "name": "Ecosia AI", "url": "https://www.ecosia.org/ai-chat", "note": "Mistral Small 4 / Mistral Small 3.2 / Unlimited", "section": "Multiple model sites" },
+      { "name": "AI Assistant", "url": "https://aiassistantbot.pages.dev/", "note": "GLM 4.7 / gpt-oss-120b / No Sign-Up", "section": "Multiple model sites" },
+      { "name": "Apertus", "url": "https://publicai.co/chat", "note": "Apertus v1.5 70B Thinking / ALIA 40B (Spain)", "section": "Multiple model sites" }
+    ],
+    "Official model sites": [
+      { "name": "Qwen Studio", "url": "https://chat.qwen.ai/", "note": "Qwen3.8 Max / Qwen3.7 Plus / Sign-Up", "section": "Official model sites" },
+      { "name": "DeepSeek", "url": "https://chat.deepseek.com/", "note": "DeepSeek-V4.1-Flash / Sign-Up / Unlimited", "section": "Official model sites" },
+      { "name": "Z.ai", "url": "https://chat.z.ai/", "note": "GLM 5.3 / GLM 5.3 Flash / Agent / Slides / Sign-Up", "section": "Official model sites" },
+      { "name": "Google AI Studio", "url": "https://aistudio.google.com/app/prompts/new_chat", "note": "Gemini 3.8 Flash / Gemini 3.1 Pro Preview / Gemini 3.5 Flash-Lite / Google Sign-Up", "section": "Official model sites" },
+      { "name": "MiniMax AI", "url": "https://agent.minimax.io/", "note": "MiniMax M3 / Agent / Sign-Up", "section": "Official model sites" },
+      { "name": "Mistral", "url": "https://chat.mistral.ai", "note": "Mistral Medium 3.5", "section": "Official model sites" }
+    ]
+  },
+  "parseOk": true
+}

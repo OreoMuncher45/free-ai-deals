@@ -94,6 +94,7 @@ function Footer() {
             <li><a className="block py-1 hover:text-white hover:underline" href="/models">All models</a></li>
             <li><a className="block py-1 hover:text-white hover:underline" href="/promos">Promotions</a></li>
             <li><a className="block py-1 hover:text-white hover:underline" href="/promos/1-dollar-deals">$1 deals</a></li>
+            <li><a className="block py-1 hover:text-white hover:underline" href="/sources/fmhy">FMHY mirror</a></li>
             <li><a className="block py-1 hover:text-white hover:underline" href="/sitemap-index.xml">Sitemap index</a></li>
           </ul>
         </div>
