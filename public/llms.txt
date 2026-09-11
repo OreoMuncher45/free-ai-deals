@@ -1,0 +1,11 @@
+# FreeModels — directory only, no keys
+
+Free AI models + $1 promos, verified. Machine index for agents.
+
+- Sitemap index: /sitemap-index.xml
+- Providers JSON: /api/providers
+- Health: /api/health
+- Providers: /providers, /providers/[slug]
+- Promos: /promos, /promos/1-dollar-deals
+- Policy: lead-only. Official signup links. Never issue/store/proxy keys.
+- Freshness: LAST_CRAWL 2026-09-11, per-provider lastChecked on each page.
